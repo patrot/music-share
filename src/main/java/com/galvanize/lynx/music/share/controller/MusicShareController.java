@@ -1,6 +1,7 @@
 package com.galvanize.lynx.music.share.controller;
 
 import com.galvanize.lynx.music.share.exceptions.ProvidePlaylistNameException;
+import com.galvanize.lynx.music.share.exceptions.SongNotFoundException;
 import com.galvanize.lynx.music.share.model.PlayList;
 import com.galvanize.lynx.music.share.model.Song;
 import com.galvanize.lynx.music.share.service.MusicShareService;
@@ -30,8 +31,8 @@ public class MusicShareController {
     }
 
     @PutMapping("/api/v1/musicshare/{playlistName}/addsong")
-    public void addSongToPlaylist(@PathVariable String playlistName, @RequestBody Song song){
-        musicShareService.addSongToPlaylist(playlistName,song);
+    public PlayList addSongToPlaylist(@PathVariable String playlistName, @RequestBody Song song) throws SongNotFoundException {
+        return musicShareService.addSongToPlaylist(playlistName,song);
     }
 
 }
