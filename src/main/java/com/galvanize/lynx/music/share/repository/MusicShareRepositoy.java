@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MusicShareRepositoy extends JpaRepository<PlayList, Long> {
+
+    PlayList findByName(String name);
 }

@@ -52,4 +52,5 @@ class MusicShareApplicationTests {
 				.andExpect(jsonPath("$[0].id").exists())
 				.andExpect(jsonPath("$[0].name").value("Classic 80"));
 	}
+
 }
