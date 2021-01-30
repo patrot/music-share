@@ -1,5 +1,6 @@
 package com.galvanize.lynx.music.share.service;
 
+import com.galvanize.lynx.music.share.exceptions.ProvidePlaylistNameException;
 import com.galvanize.lynx.music.share.model.PlayList;
 import com.galvanize.lynx.music.share.model.Song;
 import com.galvanize.lynx.music.share.repository.MusicShareRepositoy;
@@ -26,5 +27,12 @@ public class MusicShareService {
         songSet.add(song);
         playList.setSongs(songSet);
         musicShareRepositoy.save(playList);
+    }
+
+    public PlayList save(PlayList playList) throws ProvidePlaylistNameException {
+        if(playList.getName() == null || playList.getName().isEmpty()){
+            throw new ProvidePlaylistNameException();
+        }
+           return musicShareRepositoy.save(playList);
     }
 }
