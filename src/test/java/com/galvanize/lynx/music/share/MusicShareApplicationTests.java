@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -52,4 +53,5 @@ class MusicShareApplicationTests {
 				.andExpect(jsonPath("$[0].id").exists())
 				.andExpect(jsonPath("$[0].name").value("Classic 80"));
 	}
+
 }
