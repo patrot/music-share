@@ -7,7 +7,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -20,12 +22,10 @@ class MusicShareApplicationTests {
 
 	@Test
 	@DisplayName("Get All Playlists")
-	public void testGetAll_Returns_Playlist() throws Exception {
+	public void testGetAll_Returns_Empty_Playlist() throws Exception {
 
 		mockMvc.perform(get("/api/v1/musicshare/playlists"))
-				.andExpect(status().isOk());
-
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$", hasSize(0)));
 	}
-
-
 }
