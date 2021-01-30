@@ -7,7 +7,6 @@ import com.galvanize.lynx.music.share.service.MusicShareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,6 +31,11 @@ public class MusicShareController {
     @PutMapping("/api/v1/musicshare/{playlistName}/addsong")
     public void addSongToPlaylist(@PathVariable String playlistName, @RequestBody Song song){
         musicShareService.addSongToPlaylist(playlistName,song);
+    }
+
+    @PutMapping("/api/v1/musicshare/{playlistName}/removesong/{songId}")
+    public void removeSongFromPlaylist(@PathVariable String playlistName, @PathVariable Long songId){
+        musicShareService.removeSongFromPlaylist(playlistName, songId);
     }
 
 }
