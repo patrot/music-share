@@ -1,3 +1,4 @@
+# Install Java
 # Docker file for two phase build
 # Phase 1 - Build the application .jar file and name it builder
 FROM openjdk:11.0-jdk-slim as builder
@@ -10,5 +11,4 @@ FROM openjdk:11.0-jre-slim
 WORKDIR /app
 # Copy .jar file (aka, builder)
 COPY --from=builder build/libs/*.jar app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
-EXPOSE 8080
+CMD [ "sh", "-c", "java -Xmx300m -Xss512k -Dserver.port=$PORT $JAVA_OPTS -jar /app/app.jar" ]
