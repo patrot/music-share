@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -48,5 +49,22 @@ public class MusicShareService {
             throw new ProvidePlaylistNameException();
         }
            return musicShareRepositoy.save(playList);
+    }
+
+    public void removeSongFromPlaylist(String playlistName, Long songId) {
+        PlayList playList = musicShareRepositoy.findByName(playlistName);
+        Set<Song> songSet = playList.getSongs();
+        Iterator<Song> songIterator = songSet.iterator();
+        Song songForRemoval = null;
+        while(songIterator.hasNext()) {
+            Song song = songIterator.next();
+            if (song.getId() == songId) {
+                songForRemoval = song;
+            }
+        }
+
+        songSet.remove(songForRemoval);
+
+        musicShareRepositoy.save(playList);
     }
 }
