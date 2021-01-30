@@ -4,9 +4,8 @@ import com.galvanize.lynx.music.share.exceptions.ProvidePlaylistNameException;
 import com.galvanize.lynx.music.share.model.PlayList;
 import com.galvanize.lynx.music.share.service.MusicShareService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,8 +21,10 @@ public class MusicShareController {
     }
 
     @PostMapping("/api/v1/musicshare/playlist")
-    public void createNewPlaylist() throws ProvidePlaylistNameException {
-        throw new ProvidePlaylistNameException();
+    @ResponseStatus(HttpStatus.CREATED)
+    public PlayList createNewPlaylist(@RequestBody PlayList playList) throws ProvidePlaylistNameException {
+       return musicShareService.save(playList);
+
     }
 
 }
